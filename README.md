@@ -1,4 +1,4 @@
-# NextJs Personal Wesbite + Blog
+# NextJs Personal Website + Blog
 
 Welcome to my personal website built with NextJs, Tailwind CSS.
 

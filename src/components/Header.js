@@ -19,7 +19,10 @@ export default function Header({ highlight }) {
   };
 
   return (
-    <div className="flex flex-col w-full border-b-2">
+    <div
+      className="flex flex-col border-b w-full z-50 top-0 left-0 right-0  fixed supports-[backdrop-filter]:bg-background/60 bg-background/95 backdrop-blur
+     "
+    >
       <div className="flex w-full text-xl items-center justify-between py-4 px-10">
         <div
           className="text-3xl font-semibold italic tracking-wider md:text-5xl text-transparent bg-gradient-to-r from-primary to-gray-400 bg-clip-text select-none cursor-pointer"

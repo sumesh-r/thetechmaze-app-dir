@@ -15,7 +15,7 @@ export default function Projects() {
               Projects
             </h1>
             <h1>
-              I like to build things. Here are some of the things that I've
+              I like to build things. Here are some of the things that I have
               built.
             </h1>
           </div>

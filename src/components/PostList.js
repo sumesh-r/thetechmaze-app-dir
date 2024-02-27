@@ -69,7 +69,7 @@ export default function PostList({ post, project }) {
             <div className="flex gap-1 flex-wrap">
               <Link
                 href={`/tags/${p.tagSlug}`}
-                class="inline-flex items-center px-2.5 text-xs font-semibold transition-colors focus:outline-none select-none text-foreground py-1 border rounded-md border-primary gap-2"
+                className="inline-flex items-center px-2.5 text-xs font-semibold transition-colors focus:outline-none select-none text-foreground py-1 border rounded-md border-primary gap-2"
               >
                 <div className="h-5 w-5 overflow-hidden object-cover relative">
                   <Image
@@ -80,7 +80,7 @@ export default function PostList({ post, project }) {
                     loading="lazy"
                   />
                 </div>
-                <p class="text-sm">{p.tag}</p>
+                <p className="text-sm">{p.tag}</p>
               </Link>
             </div>
           </div>
@@ -120,7 +120,6 @@ export default function PostList({ post, project }) {
             <div>
               <Link
                 href={p.projectSource}
-                tabindex="0"
                 className="inline-flex items-center justify-center text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 py-0"
                 target="_blank"
                 data-bits-button-root=""

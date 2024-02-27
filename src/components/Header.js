@@ -9,7 +9,6 @@ export default function Header({ highlight }) {
     { name: "Blog", href: "/blog", highlight: "blog" },
     { name: "Tags", href: "/tags", highlight: "tags" },
     { name: "Projects", href: "/projects", highlight: "projects" },
-    { name: "About", href: "/about", highlight: "about" },
   ];
 
   const [isClick, setIsClick] = useState(false);

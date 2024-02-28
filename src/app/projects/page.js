@@ -1,113 +1,50 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PostList from "@/components/PostList";
+import { getProjectsData } from "@/lib/posts";
 
-export default function Projects() {
+export default async function Projects() {
+  const projects = await getProjectsData();
   return (
     <div className="px-5 sm:px-20">
       <Header highlight="projects" />
       <div className="mt-32"></div>
       <div>
         {/* projects */}
-        <div>
-          <div className="flex pb-5 flex-col items-center gap-2">
-            <h1 className="text-5xl pb-1 font-bold text-transparent bg-gradient-to-r from-primary to-gray-400 bg-clip-text">
-              Projects
-            </h1>
-            <h1>
-              I like to build things. Here are some of the things that I have
-              built.
-            </h1>
-          </div>
+        {projects ? (
+          <div>
+            <div className="flex pb-5 flex-col items-center gap-2">
+              <h1 className="text-5xl pb-1 font-bold text-transparent bg-gradient-to-r from-primary to-gray-400 bg-clip-text">
+                Projects
+              </h1>
+              <h1>
+                I like to build things. Here are some of the things that I have
+                built.
+              </h1>
+            </div>
 
-          <div className="flex flex-wrap space-x-2 justify-evenly">
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excert:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
-            </div>
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excert:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
-            </div>
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excert:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
-            </div>
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excert:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
-            </div>
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excert:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
+            <div className="flex flex-wrap space-x-2 justify-evenly">
+              {projects.map((project, index) => (
+                <div key={index} className="">
+                  <PostList
+                    project={{
+                      imgSrc: project.feature_image,
+                      imgAlt: project.feature_image_alt,
+                      slug: project.slug,
+                      date: project.updated_date,
+                      title: project.title,
+                      tag: project.primary_tag.name,
+                      tagSlug: project.primary_tag.slug,
+                      excerpt: project.excerpt,
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        ) : (
+          <div>No Projects Yet</div>
+        )}
       </div>
       <Footer />
     </div>

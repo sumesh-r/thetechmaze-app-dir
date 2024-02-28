@@ -10,7 +10,7 @@ export default function PostList({ post, project }) {
     title: post?.title || project?.title,
     tag: post?.tag || project?.tag,
     tagSlug: post?.tagSlug || project?.tagSlug,
-    excert: post?.excert || project?.excert,
+    excerpt: post?.excerpt || project?.excerpt,
     projectVisit: project?.projectVisit || "https://thetechmaze.com",
     projectSource: project?.projectSource || "https://github.com/sumesh-r",
   };
@@ -86,7 +86,7 @@ export default function PostList({ post, project }) {
           </div>
           <div className="">
             <Link className="" href={`/blog/${p.slug}`}>
-              <p className="">{p.excert}</p>
+              <p className="">{p.excerpt}</p>
             </Link>
           </div>
         </div>

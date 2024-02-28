@@ -182,7 +182,7 @@ export default function Home() {
                   "Linear Regression: A Mathematical and Practical Guide with NumPy",
                 tag: "Machine Learning",
                 tagSlug: "",
-                excert:
+                excerpt:
                   "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
               }}
             />
@@ -222,7 +222,7 @@ export default function Home() {
                     "Linear Regression: A Mathematical and Practical Guide with NumPy",
                   tag: "Machine Learning",
                   tagSlug: "",
-                  excert:
+                  excerpt:
                     "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
                 }}
               />
@@ -239,7 +239,7 @@ export default function Home() {
                     "Linear Regression: A Mathematical and Practical Guide with NumPy",
                   tag: "Machine Learning",
                   tagSlug: "",
-                  excert:
+                  excerpt:
                     "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
                 }}
               />
@@ -256,7 +256,7 @@ export default function Home() {
                     "Linear Regression: A Mathematical and Practical Guide with NumPy",
                   tag: "Machine Learning",
                   tagSlug: "",
-                  excert:
+                  excerpt:
                     "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
                 }}
               />

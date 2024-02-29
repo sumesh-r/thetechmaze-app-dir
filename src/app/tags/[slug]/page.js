@@ -1,10 +1,10 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import PostList from "@/components/PostList";
-import { getPostsData } from "@/lib/posts";
+import {  getPostsByTagData } from "@/lib/posts";
 
-export default async function Blog() {
-  let posts = await getPostsData();
+export default async function Blog(props) {
+  let posts = await getPostsByTagData(props.params.slug);
 
   return (
     <div className="px-5 sm:px-20">

@@ -11,7 +11,7 @@ export default async function Projects() {
       <div className="mt-32"></div>
       <div>
         {/* projects */}
-        {projects ? (
+        {projects[0] ? (
           <div>
             <div className="flex pb-5 flex-col items-center gap-2">
               <h1 className="text-5xl pb-1 font-bold text-transparent bg-gradient-to-r from-primary to-gray-400 bg-clip-text">
@@ -43,7 +43,9 @@ export default async function Projects() {
             </div>
           </div>
         ) : (
-          <div>No Projects Yet</div>
+          <div className="w-full text-center text-3xl min-h-screen flex justify-center items-center">
+            No Projects Yet
+          </div>
         )}
       </div>
       <Footer />

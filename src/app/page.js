@@ -3,8 +3,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PostList from "@/components/PostList";
 import Link from "next/link";
+import { getLatestPostsData, getLatestProjectsData } from "@/lib/posts";
 
-export default function Home() {
+export default async function Home() {
+  const latestPost = await getLatestPostsData();
+  const latestProjects = await getLatestProjectsData();
   return (
     <div className="px-5 sm:px-20">
       <Header highlight="home" />
@@ -152,117 +155,83 @@ export default function Home() {
         </div>
 
         {/* latest post */}
-        <div className="flex mt-5 mb-10 flex-col justify-between md:flex-row md:items-center space-y-4">
-          <div className="space-y-3 w-full">
-            <div className="text-start">
-              <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-primary to-gray-400 bg-clip-text md:text-5xl">
-                Latest Post
-              </h1>
-            </div>
-            <p className="text-muted-foreground">
-              Check out my latest blog post
-            </p>
-            <Link
-              href="/blog"
-              className="inline-flex items-center justify-center rounded-md font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 text-base"
-            >
-              All blogs
-            </Link>
-          </div>
-
-          <div className="w-full">
-            <PostList
-              post={{
-                imgSrc:
-                  "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                imgAlt: "blog alt",
-                slug: "",
-                date: "Jan 15, 2024",
-                title:
-                  "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                tag: "Machine Learning",
-                tagSlug: "",
-                excerpt:
-                  "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Featured Projects */}
-        <div>
-          <div className="flex flex-col items-start py-10 md:items-center md:container space-y-5">
-            <div className="items-start px-4 flex flex-col gap-3 md:items-center">
-              <h1 className="text-2xl font-bold text-transparent pb-1 bg-gradient-to-r from-primary to-gray-400 bg-clip-text md:text-5xl">
-                Featured Projects
-              </h1>
+        {latestPost[0] && (
+          <div className="flex mt-5 mb-10 flex-col justify-between md:flex-row md:items-center space-y-4">
+            <div className="space-y-3 w-full">
+              <div className="text-start">
+                <h1 className="text-2xl font-bold text-transparent bg-gradient-to-r from-primary to-gray-400 bg-clip-text md:text-5xl">
+                  Latest Post
+                </h1>
+              </div>
               <p className="text-muted-foreground">
-                Here are some of my featured projects
+                Check out my latest blog post
               </p>
-              <div>
-                <Link
-                  href="/projects"
-                  className="inline-flex items-center justify-center rounded-md font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 text-base"
-                >
-                  View all Projects
-                </Link>
+              <Link
+                href="/blog"
+                className="inline-flex items-center justify-center rounded-md font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 text-base"
+              >
+                All blogs
+              </Link>
+            </div>
+
+            <div className="w-full">
+              <PostList
+                post={{
+                  imgSrc: latestPost[0].feature_image,
+                  imgAlt: latestPost[0].feature_image_alt,
+                  slug: latestPost[0].slug,
+                  date: latestPost[0].updated_at,
+                  title: latestPost[0].title,
+                  tag: latestPost[0].primary_tag.name,
+                  tagSlug: latestPost[0].primary_tag.slug,
+                  excerpt: latestPost[0].excerpt,
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Lastest Projects */}
+        {latestProjects[0] && (
+          <div>
+            <div className="flex flex-col items-start py-10 md:items-center md:container space-y-5">
+              <div className="items-start px-4 flex flex-col gap-3 md:items-center">
+                <h1 className="text-2xl font-bold text-transparent pb-1 bg-gradient-to-r from-primary to-gray-400 bg-clip-text md:text-5xl">
+                  Latest Projects
+                </h1>
+                <p className="text-muted-foreground">
+                  Here are some of my latest projects
+                </p>
+                <div>
+                  <Link
+                    href="/projects"
+                    className="inline-flex items-center justify-center rounded-md font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 text-base"
+                  >
+                    View all Projects
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex space-x-2 justify-evenly flex-wrap">
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excerpt:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
-            </div>
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excerpt:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
-            </div>
-            <div className="">
-              <PostList
-                project={{
-                  imgSrc:
-                    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  imgAlt: "blog alt",
-                  slug: "",
-                  date: "Jan 15, 2024",
-                  title:
-                    "Linear Regression: A Mathematical and Practical Guide with NumPy",
-                  tag: "Machine Learning",
-                  tagSlug: "",
-                  excerpt:
-                    "Learn about the mathematical concepts behind linear regression and how to implement them using NumPy in Python.",
-                }}
-              />
+            <div className="flex space-x-2 justify-evenly flex-wrap">
+              {latestProjects.map((project, index) => (
+                <div key={index} className="">
+                  <PostList
+                    project={{
+                      imgSrc: project.feature_image,
+                      imgAlt: project.feature_image_alt,
+                      slug: project.slug,
+                      date: project.updated_date,
+                      title: project.title,
+                      tag: project.primary_tag.name,
+                      tagSlug: project.primary_tag.slug,
+                      excerpt: project.excerpt,
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
       <Footer />
     </div>

@@ -17,7 +17,10 @@ export default function PostList({ post, project }) {
   return (
     <div className="flex flex-col items-end mb-10">
       <div className="block pb-2 border-2 rounded-xl hover:border-primary no-highlight relative md:max-w-md shadow-xl space-y-2  lg:max-w-md cursor-pointer no-highlight">
-        <Link className="" href="/blog">
+        <Link
+          className=""
+          href={`${post ? `/blog/${p.slug}` : `/projects/${p.slug}`}`}
+        >
           <div className="p-2">
             <div className="h-56 sm:h-72 w-full overflow-hidden rounded-md object-cover relative">
               <Image
@@ -32,7 +35,10 @@ export default function PostList({ post, project }) {
         </Link>
         <div className="flex flex-col justify-between h-full gap-4 p-2.5 pt-0">
           <div className="flex flex-col justify-between gap-1">
-            <Link className="" href={`/blog/${p.slug}`}>
+            <Link
+              className=""
+              href={`${post ? `/blog/${p.slug}` : `/projects/${p.slug}`}`}
+            >
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 {post && (
                   <>

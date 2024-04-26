@@ -1,10 +1,66 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import PostList from "@/components/PostList";
-import { getPostsData } from "@/lib/posts";
 
-export default async function Blog() {
-  let posts = await getPostsData();
+export async function getPostsData() {
+  const fields =
+    "feature_image,feature_image_alt,slug,updated_at,published_at,title,excerpt,primary_tag";
+  const filter = "-projects";
+  const url = `https://${process.env.NEXT_PUBLIC_GHOST_API_URL}/ghost/api/content/posts/?key=${process.env.GHOST_CONTENT_API_KEY}&include=tags&fields=${fields}&filter=tag:${filter}`;
+
+  // const response = await fetch(url, {
+  //   method: "GET",
+  // }).then(async function (res) {
+  //   const status = res.status;
+  //   const data = await res.json();
+  //   return {
+  //     data,
+  //     status,
+  //   };
+  // });
+
+  const response = await fetch(url);
+  console.log(response);
+
+  let posts = [];
+
+  // if (response.status != 200) {
+  //   console.log(response.data.errors);
+  //   posts = [];
+  // } else {
+  //   posts = response.data.posts;
+  //   if (posts == undefined) posts = [];
+  // posts.map(
+  //   (post, idx) => (
+  //     (post.published_at = post.published_at.split("T")[0]),
+  //     (post.updated_at = post.updated_at.split("T")[0])
+  //   )
+  // );
+  // }
+
+  return posts;
+}
+export async function getStaticProps() {
+  const fields =
+    "feature_image,feature_image_alt,slug,updated_at,published_at,title,excerpt,primary_tag";
+  const filter = "-projects";
+  const url = `https://${process.env.NEXT_PUBLIC_GHOST_API_URL}/ghost/api/content/posts/?key=${process.env.GHOST_CONTENT_API_KEY}&include=tags&fields=${fields}&filter=tag:${filter}`;
+  const posts = await fetch(url).then((res) => res.json());
+  posts.map(
+    (post, idx) => (
+      (post.published_at = post.published_at.split("T")[0]),
+      (post.updated_at = post.updated_at.split("T")[0])
+    )
+  );
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
+export default async function Blog({posts}) {
+  let pots = await getPostsData();
 
   return (
     <div className="px-5 sm:px-20">
